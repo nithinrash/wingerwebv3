@@ -48,6 +48,7 @@ header a {
 /* carousel */
 .carousel {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); /* Fix for mobile browsers */
     margin-top: -50px;
     width: 100vw;
     overflow: hidden;
@@ -84,6 +85,7 @@ header a {
 
 .carousel .list .item .content {
     position: absolute;
+    /* Use flexible positioning based on viewport rather than fixed percentage */
     top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -167,7 +169,7 @@ header a {
     border: none;
     background-color: #eee;
     letter-spacing: 1px;
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif; /* Add quotes to be safe */
     font-weight: 600;
     font-size: 13px;
     cursor: pointer;
@@ -236,7 +238,8 @@ header a {
     transform: translateZ(0);
 }
 
-.thumbnail .item:hover img {
+.thumbnail .item:hover img,
+.thumbnail .item:active img { /* Added for touch screens */
     -webkit-filter: brightness(1);
     filter: brightness(1);
 }
@@ -294,6 +297,18 @@ header a {
     -webkit-appearance: none; /* Fix button appearance in Safari */
     -moz-appearance: none;
     appearance: none;
+    /* Larger touch area for buttons on mobile */
+    position: relative;
+}
+
+/* Creating larger tap targets for mobile */
+.arrows button::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
 }
 
 .arrows button:hover {
@@ -529,6 +544,13 @@ header a {
 }
 
 /* responsive styles */
+@media screen and (max-width: 1024px) {
+    .carousel .list .item .content .title,
+    .carousel .list .item .content .topic {
+        font-size: 3.5em;
+    }
+}
+
 @media screen and (max-width: 768px) {
     header {
         max-width: 95%;
@@ -541,29 +563,30 @@ header a {
 
     .carousel .list .item .content {
         padding-right: 0;
-        top: 15%;
+        top: 45%; /* Better vertical positioning for tablets */
         max-width: 95%;
         padding-top: 30px;
     }
 
     .carousel .list .item .content .title {
-        font-size: 3.2em; /* Bigger title */
+        font-size: 3em; /* Adjusted title */
     }
 
     .carousel .list .item .content .topic {
-        font-size: 3.4em; /* Bigger topic */
+        font-size: 3.2em; /* Adjusted topic */
     }
 
     .carousel .list .item .des {
-        font-size: 18px; /* Bigger description */
+        font-size: 16px; /* Adjusted description */
+        max-width: 95%; /* Wider description for readability */
     }
 
     .carousel .list .item .buttons {
-        -ms-grid-columns: 130px 5px 130px;
-        grid-template-columns: repeat(2, 130px);
+        -ms-grid-columns: 120px 5px 120px;
+        grid-template-columns: repeat(2, 120px);
         -ms-grid-rows: 40px;
         grid-template-rows: 40px;
-        font-size: 16px; /* Bigger button text */
+        font-size: 14px; /* Better button text size */
     }
 
     .thumbnail {
@@ -572,12 +595,12 @@ header a {
     }
 
     .thumbnail .item {
-        width: 100px;
-        height: 150px;
+        width: 110px;
+        height: 160px;
     }
 
     .arrows {
-        bottom: 70px;
+        bottom: 90px;
         width: 85%;
     }
 
@@ -587,14 +610,14 @@ header a {
     }
 
     .carousel.next .list .item:nth-child(1) img {
-        width: 100px;
-        height: 150px;
+        width: 110px;
+        height: 160px;
     }
 
     @-webkit-keyframes outFrame {
         to {
-            width: 100px;
-            height: 150px;
+            width: 110px;
+            height: 160px;
             bottom: 30px;
             left: 50%;
             border-radius: 20px;
@@ -603,8 +626,8 @@ header a {
 
     @keyframes outFrame {
         to {
-            width: 100px;
-            height: 150px;
+            width: 110px;
+            height: 160px;
             bottom: 30px;
             left: 50%;
             border-radius: 20px;
@@ -612,25 +635,93 @@ header a {
     }
 }
 
-@media screen and (max-width: 480px) {
+/* Medium-sized phones (e.g., Pixel 7) */
+@media screen and (max-width: 600px) {
     .carousel .list .item .content {
-        top: 25%;
-        padding-top: 40px;
+        top: 42%; /* Better positioning for medium phones */
+        transform: translateY(-45%); /* Adjusted to prevent content from being too high */
+        padding-top: 20px;
     }
 
     .carousel .list .item .content .title {
-        font-size: 2.2em; /* Slightly smaller title */
+        font-size: 2.4em;
     }
 
     .carousel .list .item .content .topic {
-        font-size: 2.6em; /* Slightly smaller topic */
+        font-size: 2.6em;
     }
 
     .carousel .list .item .des {
-        font-size: 15px; /* Slightly smaller description */
+        font-size: 15px;
+        margin-top: 15px;
     }
 
-    /* 🔻 Reduced thumbnail size */
+    .thumbnail .item {
+        width: 80px;
+        height: 120px;
+    }
+
+    .arrows {
+        bottom: 180px;
+    }
+
+    .carousel.next .list .item:nth-child(1) img {
+        width: 80px;
+        height: 120px;
+    }
+
+    @-webkit-keyframes outFrame {
+        to {
+            width: 80px;
+            height: 120px;
+            bottom: 30px;
+            left: 50%;
+            border-radius: 15px;
+        }
+    }
+
+    @keyframes outFrame {
+        to {
+            width: 80px;
+            height: 120px;
+            bottom: 30px;
+            left: 50%;
+            border-radius: 15px;
+        }
+    }
+
+    .carousel .list .item .buttons {
+        -ms-grid-columns: 110px 5px 110px;
+        grid-template-columns: repeat(2, 110px);
+        -ms-grid-rows: 36px;
+        grid-template-rows: 36px;
+        font-size: 12px;
+    }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+    .carousel .list .item .content {
+        top: 40%; /* Fixed positioning for small phones */
+        transform: translateY(-40%);
+        padding-top: 10px;
+    }
+
+    .carousel .list .item .content .title {
+        font-size: 2em; /* Smaller title for small screens */
+    }
+
+    .carousel .list .item .content .topic {
+        font-size: 2.2em; /* Smaller topic for small screens */
+    }
+
+    .carousel .list .item .des {
+        font-size: 14px; /* Smaller description */
+        margin-top: 10px;
+        max-width: 100%; /* Full width for small screens */
+    }
+
+    /* Reduced thumbnail size */
     .thumbnail .item {
         width: 60px;
         height: 90px;
@@ -641,7 +732,13 @@ header a {
     }
 
     .arrows {
-        bottom: 240px;
+        bottom: 140px; /* Adjusted position */
+        width: 90%;
+    }
+
+    .arrows button {
+        width: 32px;
+        height: 32px;
     }
 
     .carousel.next .list .item:nth-child(1) img {
@@ -670,10 +767,39 @@ header a {
     }
 
     .carousel .list .item .buttons {
-        -ms-grid-columns: 100px 5px 100px;
-        grid-template-columns: repeat(2, 100px);
+        -ms-grid-columns: 90px 5px 90px;
+        grid-template-columns: repeat(2, 90px);
         -ms-grid-rows: 34px;
         grid-template-rows: 34px;
-        font-size: 7px; /* Slightly smaller button text */
+        font-size: 11px; /* Better readable text size */
+    }
+}
+
+/* Very small phones or landscape mode */
+@media screen and (max-height: 600px) {
+    .carousel .list .item .content {
+        top: 35%;
+    }
+
+    .carousel .list .item .content .title,
+    .carousel .list .item .content .topic {
+        font-size: 1.8em;
+    }
+
+    .carousel .list .item .des {
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .thumbnail {
+        bottom: 20px;
+    }
+
+    .arrows {
+        bottom: 100px;
+    }
+
+    .carousel .list .item .buttons {
+        margin-top: 10px;
     }
 }
