@@ -564,6 +564,7 @@ header a {
     .carousel .list .item .content {
         padding-right: 0;
         top: 45%; /* Better vertical positioning for tablets */
+        transform: translateY(-50%); /* Center content vertically */
         max-width: 95%;
         padding-top: 30px;
     }
@@ -637,9 +638,18 @@ header a {
 
 /* Medium-sized phones (e.g., Pixel 7) */
 @media screen and (max-width: 600px) {
+    header {
+        max-width: 95%;
+    }
+
+    header a {
+        margin-right: 12px;
+        font-size: 14px;
+    }
+
     .carousel .list .item .content {
-        top: 42%; /* Better positioning for medium phones */
-        transform: translateY(-45%); /* Adjusted to prevent content from being too high */
+        top: 50%; /* Perfect vertical centering for medium phones */
+        transform: translateY(-50%); /* Ensure proper vertical centering */
         padding-top: 20px;
     }
 
@@ -701,14 +711,25 @@ header a {
 
 /* Small phones */
 @media screen and (max-width: 480px) {
+    header {
+        max-width: 95%;
+        padding: 15px 0;
+    }
+
+    header a {
+        margin-right: 10px;
+        font-size: 13px;
+    }
+
     .carousel .list .item .content {
-        top: 40%; /* Fixed positioning for small phones */
-        transform: translateY(-40%);
+        top: 50%; /* Perfect vertical centering for small phones */
+        transform: translateY(-50%); /* Vertical centering */
         padding-top: 10px;
     }
 
     .carousel .list .item .content .title {
         font-size: 2em; /* Smaller title for small screens */
+        margin-bottom: 5px;
     }
 
     .carousel .list .item .content .topic {
@@ -722,6 +743,11 @@ header a {
     }
 
     /* Reduced thumbnail size */
+    .thumbnail {
+        bottom: 25px;
+        gap: 6px;
+    }
+
     .thumbnail .item {
         width: 60px;
         height: 90px;
@@ -750,7 +776,7 @@ header a {
         to {
             width: 60px;
             height: 90px;
-            bottom: 30px;
+            bottom: 25px;
             left: 50%;
             border-radius: 15px;
         }
@@ -760,7 +786,7 @@ header a {
         to {
             width: 60px;
             height: 90px;
-            bottom: 30px;
+            bottom: 25px;
             left: 50%;
             border-radius: 15px;
         }
@@ -772,13 +798,19 @@ header a {
         -ms-grid-rows: 34px;
         grid-template-rows: 34px;
         font-size: 11px; /* Better readable text size */
+        margin-top: 12px;
     }
 }
 
 /* Very small phones or landscape mode */
 @media screen and (max-height: 600px) {
+    header {
+        padding: 10px 0;
+    }
+
     .carousel .list .item .content {
-        top: 35%;
+        top: 50%; /* Perfect vertical centering for landscape mode */
+        transform: translateY(-50%);
     }
 
     .carousel .list .item .content .title,
@@ -789,6 +821,7 @@ header a {
     .carousel .list .item .des {
         font-size: 13px;
         margin-top: 5px;
+        max-width: 95%;
     }
 
     .thumbnail {
